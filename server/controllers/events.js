@@ -4,7 +4,7 @@ const router = require('express').Router();
 const {calculateThresholdsDates, calculateThresholdBarPlots} = require ('../utils/index');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const eventData = await Event.findAll({
             attributes: ['id', 'name', 'description', 'due_date', 'created_at'],
@@ -12,9 +12,6 @@ router.get('/', withAuth, async (req, res) => {
                 model: Category,
                 attributes: ['name', 'type', 't1', 't2', 't3']
             }],
-            where: {
-                user_id: req.session.userId
-            }
         })
         const events = eventData.map((event) => event.get({ plain: true }));
         res.status(200).json(calculateThresholdBarPlots(events));
@@ -22,7 +19,7 @@ router.get('/', withAuth, async (req, res) => {
         res.render('homepage');
     }
 });
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const eventData = await Event.findByPk(req.params.id, {
             attributes: ['id', 'name', 'description', 'due_date', 'created_at'],

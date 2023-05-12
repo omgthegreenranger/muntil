@@ -3,9 +3,9 @@ const sequelize = require('sequelize');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    if (!req.session.loggedIn) {
-        return res.render('homepage');
-    }
+    // if (!req.session.loggedIn) {
+    //     return res.render('homepage');
+    // }
     try {
         const eventData = await Event.findAll({
             attributes:['id', 'name', 'description', 'due_date'],

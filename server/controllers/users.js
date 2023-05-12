@@ -4,37 +4,30 @@ const router = require('express').Router();
 
 router.get('/', async (req, res) => {
     try {
-        const userData = await User.findAll({
-            attributes:['id', 'name', 'description', 'due_date'],
-            where: {
-                id: req.session.userId
-            },
-            include: [{
-                model: Category,
-                attributes: ['name', 'type', 'T1', 'T2', 'T3']
-            }]
+        const response = await User.findAll({
+            attributes:['id', 'first_name', 'last_name', 'email'],
         });
-        res.render('homepage', eventData);
+        res.send(response);
     } catch (err) {
-        res.render('login');
+        res.status(500).res.json(err);
     }
 });
 
 // Route for login.
-router.get('/:username', async (req,res) => {
-    try {
-        const loginData = await User.findOne(
-            {where: { username: req.params.username },
+// router.get('/:username', async (req,res) => {
+//     try {
+//         const loginData = await User.findOne(
+//             {where: { username: req.params.username },
 
-            attributes: ['id', 'username', 'password']
-        });
+//             attributes: ['id', 'username', 'password']
+//         });
 
-        res.status(200).json(loginData);
-        // res.render('login', loginData);
+//         res.status(200).json(loginData);
+//         // res.render('login', loginData);
 
-    } catch (err) {
-        res.render('login');
-    }
-})
+//     } catch (err) {
+//         res.render('login');
+//     }
+// })
 
 module.exports = router;

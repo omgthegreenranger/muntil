@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import './styles.css';
-import { run as runHolder } from 'holderjs/holder';
+// import { run as runHolder } from 'holderjs/holder';
 import { Display } from './index.jsx';
 
 export function Layout() {

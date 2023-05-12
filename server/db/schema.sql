@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS muntil_db;
+CREATE DATABASE muntil_db;
+
