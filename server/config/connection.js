@@ -12,9 +12,9 @@ if (process.env.JAWSDB_URL) {
   process.env.DB_USER,
   process.env.DB_PASS,
   {
-    host: '127.0.0.1',
+    host: '192.168.1.20',
     dialect: 'mysql',
-    port: 3306,
+    port: 49153,
   })
 };
 

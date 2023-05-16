@@ -1,48 +1,56 @@
 import React, {useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Button} from 'react-bootstrap';
 import './styles.css';
 // import { run as runHolder } from 'holderjs/holder';
-import { Display } from './index.jsx';
+import { Display, Modals } from './index.jsx';
 import axios from 'axios';
 
-export function Layout() {
+export function Layout(props) {
     // let's set up our basic grid.
-    const ref = useRef();
     const [width, setWidth] = useState();
     const [users, setUsers] = useState();
-    const [events, setEvents] = useState();
+    const [tils, setTils] = useState();
+    const [cats, setCats] = useState();
 
     useEffect(() => { axios.get('/events').then((response) => {
-                setEvents(response.data);
+                setTils(response.data);
     })}, []);
 
-    // useEffect(() => {
-    //     setWidth(ref.current ? ref.current.offsetWidth : ref.current);
-    // }, [ref.current]);
+    useEffect(() => { axios.get('/categories').then((response) => {
+                setCats(response.data);
+    })},[]);
 
-    // useEffect(() => {
-    //     function handleResize() {
-    //       setWidth(window.innerWidth)}
-    //     window.addEventListener('resize', handleResize)
-    //     })
+console.log("Categories", cats);
 
-
-  console.log(width);
-
-if(!events) return (<h3>Nothing yet...</h3>);
     return(
     <>
-    <Container className="d-flex justify-content-center">
-
+    <Container className="d-flex justify-content-center flex-column">
         <Row className="d-flex direction-row w-100 justify-content-center">
-            {/* <Col xs={2}>
-            <img src="holder.js/300x200" />
-            </Col> */}
-            <div ref={ref} className="d-flex justify-content-center">
-                <Display events={events} width={width} setWidth={setWidth} />
-            </div>
+            <Col>
+                <WidthTable width={width} />
+                <div className="d-flex justify-content-center">
+                    <Display tils={tils} width={width} cats={cats} setCats={setCats} setWidth={setWidth} modalUp = {props.modalUp} setModalUp={props.setModalUp} />
+                </div>
+            </Col>
         </Row>
     </Container>
     </>
+    )
+}
+
+function WidthTable(props) {
+    let width = props.width;
+    let width1 = width / 3;
+    let width2 = width1 * 2;
+    let width3 = width1 * 3;
+
+    console.log(width1);
+
+    return(
+        <div className="gridlines">
+            <div className="width" style={{width: width1}}></div>
+            <div className="width" style={{width: width2}}></div>
+            <div className="width" style={{width: width3}}></div>
+        </div>
     )
 }

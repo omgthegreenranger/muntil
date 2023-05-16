@@ -6,10 +6,11 @@ import { Layout } from './components/layout.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
-  
+    const [modalUp, setModalUp] = useState({show: false, select: ""});
+
     return (
-      <div className="d-flex" fluid>
-          <Layout />
+      <div className="d-flex">
+          <Layout modalUp = {modalUp} setModalUp={setModalUp} />
       </div>
     );
   }
