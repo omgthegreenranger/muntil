@@ -6,10 +6,10 @@ import { Layout } from './components/layout.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
+  
     return (
-      <div className="d-flex">
+      <div className="d-flex" fluid>
           <Layout />
-
       </div>
     );
   }
