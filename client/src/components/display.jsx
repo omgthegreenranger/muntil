@@ -6,7 +6,7 @@ import {Modals} from './index';
 
 
 export function Display(props) {
-    const {tils, width, cats, setCats, setWidth, modalUp, setModalUp } = props;
+    const {type, setType, tils, width, cats, setCats, setWidth, modalUp, setModalUp } = props;
     const [til, setTil] = useState({});
     const ref = useRef();
 
@@ -29,18 +29,17 @@ if(!tils) return( <h3>Loading</h3> );
     return ( 
         <>
         <div ref={ref} className="display">
+            <WidthTable width={width} />
                 {tils.map((til) => {
+                    if(Math.floor(til.progress) >= 1) {
                     return(
                         <>             
-                            <Muntil til={til} width={width} setWidth={setWidth} setTil={setTil} modalUp = {modalUp} setModalUp={setModalUp} />
+                            <Muntil type={type} setType={setType} til={til} width={width} setWidth={setWidth} setTil={setTil} modalUp = {modalUp} setModalUp={setModalUp} />
                             <div></div>
                         </>
                     )
-                })}
-                 <div>
-                    <Button className="add-new-btn" onClick={() => {props.setModalUp({show: true, select: "new-til"})}}>+</Button>
-                </div>
-                <Modals til={til} setTil={setTil} cats={cats} setCats={setCats} modalUp={modalUp} setModalUp={setModalUp} />
+                }})}
+                <Modals type={type} setType={setType} til={til} setTil={setTil} cats={cats} setCats={setCats} modalUp={modalUp} setModalUp={setModalUp} />
         </div>
         </>
             )
@@ -49,9 +48,6 @@ if(!tils) return( <h3>Loading</h3> );
 function Muntil(props) {
     let til = props.til;
     let progress = Math.floor(til.progress);
-    if(progress < 1) {
-        progress = 1
-    }
     let widthNodes = Math.floor(props.width / 9);
     let widthBar = Math.floor(widthNodes * progress);
     var colorStyle = "bg-primary";
@@ -69,7 +65,8 @@ function Muntil(props) {
     }
 
     const handleEventModal = (event) => {
-        props.setModalUp({show: true, select: "edit-til"})
+        props.setModalUp(true)
+        props.setType('view-til')
         props.setTil(til);
         console.log(til);
         return
@@ -83,5 +80,23 @@ function Muntil(props) {
         </Row>
 
         </>
+    )
+}
+
+
+function WidthTable(props) {
+    let width = props.width;
+    let width1 = width / 3;
+    let width2 = width1 * 2;
+    let width3 = width1 * 3;
+
+    console.log(width1);
+
+    return(
+        <div className="gridlines">
+            <div className="width width1" style={{width: width1}}></div>
+            <div className="width width2" style={{width: width2}}></div>
+            <div className="width width3" style={{width: width3}}></div>
+        </div>
     )
 }

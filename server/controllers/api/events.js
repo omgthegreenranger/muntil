@@ -1,18 +1,18 @@
 const { User, Category, Event } = require('../../models');
 const sequelize = require('sequelize');
 const router = require('express').Router();
-const withAuth = require('../../utils/auth');
+const moment = require('moment');
+// const withAuth = require('../../utils/auth');
 
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
       const eventData = await Event.create({
         name: req.body.name,
         description: req.body.description,
         due_date: req.body.due_date,
         location: "",
-        category_id: req.body.category_id,
-        user_id: req.session.userId
+        category_id: req.body.category_id
       });
       eventData = eventData.get({plain: true});
       res.send(eventData)
@@ -22,7 +22,7 @@ router.post('/', withAuth, async (req, res) => {
     }
   });
   
-  router.put('/:id', withAuth, async (req, res) => {
+  router.put('/:id', async (req, res) => {
     try {
       console.log(req.body);
       const eventUpdate = await Event.update({
@@ -43,7 +43,7 @@ router.post('/', withAuth, async (req, res) => {
     }
   })
   
-  router.delete('/:id', withAuth, async (req, res) => {
+  router.delete('/:id', async (req, res) => {
   
     try {
       Event.destroy({
