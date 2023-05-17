@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         const events = eventData.map((event) => event.get({ plain: true }));
         res.status(200).json(calculateThresholdBarPlots(events));
     } catch (err) {
-        res.render('homepage');
+        res.status(500).json(err);
     }
 });
 router.get('/:id', async (req, res) => {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
         const event = eventData.get({ plain: true });
         res.status(200).json(calculateThresholdsDates(event));
     } catch {
-        res.render('homepage');
+        res.status(500).json(err);
     }
 }
 );

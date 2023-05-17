@@ -6,21 +6,24 @@ const moment = require('moment');
 
 
 router.post('/', async (req, res) => {
-    try {
+  try {
       const eventData = await Event.create({
         name: req.body.name,
         description: req.body.description,
         due_date: req.body.due_date,
         location: "",
         category_id: req.body.category_id
-      });
-      eventData = eventData.get({plain: true});
+      })
+      .then((data) => {
+      eventData = data.get({plain: true});
+      console.log(eventData)
       res.send(eventData)
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+    })
+  }
+  catch (error) {
+      res.send(error)
+  }
+});
   
   router.put('/:id', async (req, res) => {
     try {
@@ -36,7 +39,7 @@ router.post('/', async (req, res) => {
           id: req.params.id
         },
       })
-      res.send(eventUpdate)
+      res.json(eventUpdate)
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
