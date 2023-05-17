@@ -12,64 +12,60 @@ export function Display(props) {
     const [dots, setDots] = useState([]); // There are dots that are not.
     const [til, setTil] = useState({}); // this is a single Til
     const [cats, setCats] = useState(); // These are the categories
-    const {type, setType, width, setWidth, modalUp, setModalUp } = props;
-    const ref = useRef();
+    const {type, setType, width, setWidth, modalUp, setModalUp } = props; // destructuring props
+    const ref = useRef(); // ref is used for the detection of width
 
         // these are the MySQL queries to get the events and the categories.
+        // first, we start with events
     useEffect(() => { 
-    axios.get('/events').then((response) => {
-        let data = response.data;
-        setDatas(response.data);
-        setTils([]);
-        setDots([]);
-        data.forEach((obj, index) => {
-            data[index].progress = Math.floor(data[index].progress)
-            let datum = data[index]
-            if(data[index].progress >= 1) {
-                console.log("Yas!")
-                setTils((current) => [...current,datum]
-                )
-            } else if (data[index].progress <= 0) {
-                setDots((current) => [...current,datum]
+        axios.get('/events').then((response) => {
+            let data = response.data;
+            setDatas(response.data);
+            // empty the arrays to prevent duplication
+            setTils([]);
+            setDots([]);
+            // run a loop to split the results and normalize the progress
+            data.forEach((obj, index) => {
+                data[index].progress = Math.floor(data[index].progress)
+                let datum = data[index]
+                if(data[index].progress >= 1) {
+                    console.log("Yas!")
+                    setTils((current) => [...current,datum]
                     )
-            }
-        })
-    })}, []);
+                } else if (data[index].progress <= 0) {
+                    setDots((current) => [...current,datum]
+                        )
+                }
+            })})
+    },
+    []);
+
+        // Then we do categories. Much easier
 
     useEffect(() => { axios.get('/categories').then((response) => {
         setCats(response.data);
     })},[]);
 
-    console.log("Tils",tils);
-    console.log("Dots", dots)
-    console.log("Datas", datas)
-    console.log("Cats", cats)
-
-
-    // This two effects determine and set the width of the block, including resizes
+    // These two effects determine and set the width of the block, including resizes
+        // First, we take width into state.
     useEffect(() => {
         setWidth(ref.current ? ref.current.offsetWidth : ref.current);
     }, [ref.current]);
 
+        // Then, we handle changes in size
     useEffect(() => {
         function handleResize() {
             setWidth(ref.current ? ref.current.offsetWidth : ref.current)}
         window.addEventListener('resize', handleResize)
     })
 
-
-
-
+    // Quick modal-opening function for adding a new event
     const newModal = () => {
         props.setModalUp(true);
         setType('new-til')
     }
 
-
-
-
-
-
+    // Without the Tils from MySQL, why do we even show anything? Let's not.
     if(!tils) return <h3>LOADING...</h3>
 
     return ( 
@@ -91,29 +87,31 @@ export function Display(props) {
                 </select>
                 <Button className="add-new-btn" onClick={newModal}>+</Button>
             </div>
-
             <WidthTable width={width} />
                 {tils.map((til) => {
-                    console.log(til)
-                    if(til.progress >= 1) {
+                    // iterating the Tils to return Muntils. Should we move this into the component itself?
                         return(
                             <>             
                                 <Muntil type={type} setType={setType} til={til} width={width} setWidth={setWidth} setTil={setTil} modalUp = {modalUp} setModalUp={setModalUp} />
                             </>
                         )
-                }})}
-                <Tildots dots={dots} setDots={dots} />
-                <Modals type={type} setType={setType} til={til} setTil={setTil} cats={cats} setCats={setCats} modalUp={modalUp} setModalUp={setModalUp} />
+                })}
+            <Tildots dots={dots} setDots={dots} />
+            <Modals type={type} setType={setType} til={til} setTil={setTil} cats={cats} setCats={setCats} modalUp={modalUp} setModalUp={setModalUp} />
         </div>
         </>
             )
 }
 
+// This function deploys individual Til bars for now
 function Muntil(props) {
-    let til = props.til
-    let progress = Math.floor(til.progress);
-    let widthNodes = Math.floor(props.width / 9);
-    let widthBar = Math.floor(widthNodes * progress);
+    // Not much to destructure
+    let til = props.til // set the individual til
+    let progress = til.progress; // Progress has already been normalized.
+    let widthNodes = Math.floor(props.width / 9); // Get width for the three thresholds
+    let widthBar = Math.floor(widthNodes * progress); // get the width of the bar itself.
+
+    // We're setting the colour of the bar based on the Progress level. Urgency is the name of the game.
 
     var colorStyle = "bg-primary";
     if (progress === 1) {
@@ -125,9 +123,10 @@ function Muntil(props) {
     } else if ( progress >6 && progress <= 9 ) {
         colorStyle = "bg-danger";
     } else if ( progress > 9 ) {
-        colorStyle = "passed"
+        colorStyle = "passed" // this is a custom CSS to make completed tils fancy.
     }
 
+    // Making sure we can open Tils for viewing.
     const handleEventModal = (event) => {
         props.setModalUp(true)
         props.setType('view-til')
@@ -135,7 +134,7 @@ function Muntil(props) {
         console.log(til);
         return
     }
-
+    // Here is the actual render.
     return(
         <>
         <Row className="display-block d-inline-flex justify-content-center align-content-center my-2" width={widthBar}>
@@ -146,7 +145,7 @@ function Muntil(props) {
     )
 }
 
-
+// This is the background lines - there is probably an easier way to do this.
 function WidthTable(props) {
     let width = props.width;
     let width1 = width / 3;

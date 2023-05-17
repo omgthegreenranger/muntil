@@ -52,12 +52,13 @@
     border-radius: 60px;
     font-size: 15px;
     text-align: center;
-    transition:ease-in-out;
+    animation: 0.2s ease-in-out;
     z-index: 99;
 }
 
 .add-new-btn:hover::after {
     content: " Add new Til";
+    animation: 0.2s ease-in-out;
 
 }
 

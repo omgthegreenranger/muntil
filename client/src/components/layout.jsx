@@ -7,21 +7,9 @@ import axios from 'axios';
 
 export function Layout(props) {
     // let's set up our basic grid.
-    const [width, setWidth] = useState();
-    const [users, setUsers] = useState();
-    // const [tils, setTils] = useState();
-    // const [cats, setCats] = useState();
-    const [type, setType] = useState();
-
-    // useEffect(() => { axios.get('/events').then((response) => {
-    //             setTils(response.data);
-    // })}, []);
-
-    // useEffect(() => { axios.get('/categories').then((response) => {
-    //             setCats(response.data);
-    // })},[]);
-
-
+    const [width, setWidth] = useState(); // to get the width of the element
+    const [users, setUsers] = useState(); // to get the user info (TBD)
+    const [type, setType] = useState(); // To get the type of modal to open
 
     return(
     <>
@@ -43,20 +31,3 @@ export function Layout(props) {
     </>
     )
 }
-
-// function WidthTable(props) {
-//     let width = props.width;
-//     let width1 = width / 3;
-//     let width2 = width1 * 2;
-//     let width3 = width1 * 3;
-
-//     console.log(width1);
-
-//     return(
-//         <div className="gridlines">
-//             <div className="width width1" style={{width: width1}}></div>
-//             <div className="width width2" style={{width: width2}}></div>
-//             <div className="width width3" style={{width: width3}}></div>
-//         </div>
-//     )
-// }
