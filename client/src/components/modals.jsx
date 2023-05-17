@@ -10,7 +10,6 @@ export function Modals(props) {
     // detects which Modal interface is to be rendered based on type State
     // note that the same component is used for both editing and creating a new Til.
     function RenderSwitch() {
-        console.log(type);
         switch(type) {
             case 'new-til':
                 return <RenderTil type={type} setType={setType} handleClose={handleClose} cats={cats} setCats={setCats} />;
@@ -30,7 +29,7 @@ export function Modals(props) {
         };
 
     return(
-        <Modal show={modalUp} onHide={handleClose}>
+        <Modal size="lg" show={modalUp} onHide={handleClose}>
             <RenderSwitch select={type} />
         </Modal>
     )
@@ -48,7 +47,7 @@ function RenderTil(props) {
                 "category_id": '',
                 "due_date": "",
                 "location": "",
-                "user_id": ''})
+                "user_id": '1'})
         }
         if(type === "edit-til") {
             setFormData(til)
@@ -58,7 +57,29 @@ function RenderTil(props) {
     // submit function
 
     async function submitTil(e) {
-        axios.post('/api/events')
+        let id = '';
+
+        if(type === "edit-til") {
+            axios.put(`./api/events/${formData.id}`, formData)
+            .then((response) => { 
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+        if(type === "new-til") {
+            axios.post("./api/events/", formData)
+            .then((response) => { 
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+    
+        handleClose();
+    
     }
 
     // function handle changes in form data
@@ -70,7 +91,6 @@ function RenderTil(props) {
             [name]: value,
         }
         );
-        console.log(formData);
     }
     return (
         <>
@@ -85,7 +105,7 @@ function RenderTil(props) {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Select aria-label="Default select Example" name="category" onChange={handleChange}>
+                        <Form.Select aria-label="Default select Example" name="category_id" onChange={handleChange}>
                         <option>Choose category</option>
                         {cats.map((cat) => {
                             return(
@@ -126,7 +146,7 @@ function RenderView(props) {
     const editTil = (event) => {
         setType("edit-til");
     }
-    
+
     // Deletes the Till being viewed.
     const deleteTil = (event) => {
         axios.delete(`/api/events/${til.id}`)
@@ -134,26 +154,40 @@ function RenderView(props) {
 
     return (
         <>
-        <Modal.Header closeButton>
-        <Modal.Title>{til.name}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <span>{til.name}</span>
-      <span>{til.description}</span>
-      <span>{til.due_date}</span>
-      <span>{til.category.name}</span>
-    </Modal.Body>
-        <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-            Close
-        </Button>
-        <Button variant="primary" type="submit" onClick={editTil}>
-            Edit Til
-        </Button>
-        <Button variant="danger" type="submit" onClick={deleteTil}>
-            Delete Til
-        </Button>
-    </Modal.Footer>
-    </>
+            <Modal.Header closeButton>
+                <Modal.Title>{til.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Container className="d-flex flex-row">
+                    <Col>
+                        <Row className="d-flex">
+                            <Col>
+                                <span>{til.description}</span>
+                                <span>{til.due_date}</span>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <span>{til.category.name}</span>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col>
+                        <div>Category information</div>
+                    </Col>
+                </Container>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" type="submit" onClick={editTil}>
+                    Edit Til
+                </Button>
+                <Button variant="danger" type="submit" onClick={deleteTil}>
+                    Delete Til
+                </Button>
+            </Modal.Footer>
+        </>
     )
 }
