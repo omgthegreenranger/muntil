@@ -1,6 +1,7 @@
 const User = require('./User');
 const Category = require('./Category');
 const Event = require('./Event');
+const Sticky = require ('./Sticky');
 
 Event.belongsTo(Category, {
   foreignKey: 'category_id',
