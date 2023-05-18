@@ -4,7 +4,7 @@ import "./styles.css";
 import { Modals, Muntils } from "./index";
 import axios from "axios";
 
-export function Display(props) {
+export default function Display(props) {
   const [tils, setTils] = useState([]); // These are bars that are relevant
   const [dots, setDots] = useState([]); // There are dots that are not.
   const [til, setTil] = useState({}); // this is a single Til

@@ -5,6 +5,7 @@ import "./styles.css";
 import { Display } from "./index.jsx";
 
 export function Layout(props) {
+
   // let's set up our basic grid.
   const [width, setWidth] = useState(); // to get the width of the element
   const [users, setUsers] = useState(); // to get the user info (TBD)

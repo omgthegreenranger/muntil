@@ -3,7 +3,7 @@ import { Modal, Container, Col, Row, Button, Form } from "react-bootstrap";
 import "./styles.css";
 import axios from "axios";
 
-export function Modals(props) {
+export default function Modals(props) {
   const { type, setType, til, cats, setCats, modalUp, setModalUp } = props;
   // detects which Modal interface is to be rendered based on type State
   // note that the same component is used for both editing and creating a new Til.
@@ -121,64 +121,79 @@ function RenderTil(props) {
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>{formData.title}</Modal.Title>
+        <Modal.Title>{formData.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="mb-3">
-          <Form.Group>
-            <Form.Label>Til Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              placeholder="Name (e.g. Dads Birthday)"
-              defaultValue={formData.name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Category</Form.Label>
-            <Form.Select
-              aria-label="Default select Example"
-              name="category_id"
-              onChange={handleChange}
-            >
-              <option>Choose category</option>
-              {cats.map((cat) => {
-                if (cat.id === formData.category_id) {
-                  return (
-                    <option value={cat.id} selected>
-                      {cat.name}
-                    </option>
-                  );
-                } else {
-                  return <option value={cat.id}>{cat.name}</option>;
-                }
+        <Container className="d-flex flex-row">   
+            <Col>
+                <Row className="d-flex">
+                    <Col>
+                        <Form className="mb-3">
+                            <Form.Group>
+                                <Form.Label>Til Name</Form.Label>
+                                <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Name (e.g. Dads Birthday)"
+                                defaultValue={formData.name}
+                                onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Category</Form.Label>
+                                <Form.Select
+                                aria-label="Default select Example"
+                                name="category_id"
+                                onChange={handleChange}
+                                >
+                                <option>Choose category</option>
+                                {cats.map((cat) => {
+                                    if (cat.id === formData.category_id) {
+                                    return (
+                                        <option value={cat.id} selected>
+                                        {cat.name}
+                                        </option>
+                                    );
+                                    } else {
+                                    return <option value={cat.id}>{cat.name}</option>;
+                                    }
 
-                return;
-              })}
-              <option value="new">Add new category</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group controlId="description.TextArea">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={5}
-              name="description"
-              defaultValue={formData.description}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Due Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="due_date"
-              defaultValue={formData.due_date}
-              onChange={handleChange}
-            />
-          </Form.Group>
-        </Form>
+                                    return;
+                                })}
+                                <option value="new">Add new category</option>
+                                </Form.Select>
+                            </Form.Group>
+                            <Form.Group controlId="description.TextArea">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                as="textarea"
+                                rows={5}
+                                name="description"
+                                defaultValue={formData.description}
+                                onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Due Date</Form.Label>
+                                <Form.Control
+                                type="date"
+                                name="due_date"
+                                defaultValue={formData.due_date}
+                                onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Form>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                </Row>
+            </Col>
+            <Col>
+                <h4>Category information</h4>
+                
+            </Col>
+        </Container>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

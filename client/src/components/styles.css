@@ -1,125 +1,145 @@
 .display {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
 }
 .display-block {
 }
 
 .display-block {
-    margin-top:0;
-    height: 4rem;
+  margin-top: 0;
+  height: 4rem;
 }
 
 .til-bar {
-    height: 3rem;
-    margin-top: 1rem;
-    border-radius: .50rem;
-    box-shadow: 0px 0px 10px;
-    text-align: center;
-    z-index: 99;
-    animate: all 0.2s ease-in;
+  height: 3rem;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px;
+  text-align: center;
+  z-index: 99;
+  animate: all 0.2s ease-in;
 }
 
 .til-bar:hover {
-    height: 3.5rem;
+  height: 3.5rem;
 }
 
 .gridlines {
-    display: flex;
-    justify-content: center;
-    position:static;
+  display: flex;
+  justify-content: center;
+  position: static;
 }
 
 .width {
-    border-left: 1px grey dotted;
-    border-right: 1px grey dotted;
-    height:100%;
-    position: absolute;
+  border-left: 1px grey dotted;
+  border-right: 1px grey dotted;
+  height: 100%;
+  position: absolute;
 }
 
 .passed {
-    background: repeating-linear-gradient(45deg,
-    green 0, green 25%, #58a 0, #58a 50%);
-        background-size: 42.426406871px 42.426406871px;
+  background: repeating-linear-gradient(
+    45deg,
+    green 0,
+    green 25%,
+    #58a 0,
+    #58a 50%
+  );
+  background-size: 42.426406871px 42.426406871px;
 }
 
 .add-new-btn {
-    float: right;
-    padding: 13px 18px;
-    border-radius: 60px;
-    font-size: 15px;
-    text-align: center;
-    animation: 0.2s ease-in-out;
-    z-index: 99;
+  float: right;
+  padding: 13px 18px;
+  border-radius: 60px;
+  font-size: 15px;
+  text-align: center;
+  animation: 0.2s ease-in-out;
+  z-index: 99;
 }
 
 .add-new-btn:hover::after {
-    content: " Add new Til";
-    animation: 0.2s ease-in-out;
-
+  content: " Add new Til";
+  animation: 0.2s ease-in-out;
 }
 
 .width1 {
-    z-index: 3;
+  z-index: 3;
 }
 
 .width2 {
-    z-index: 2;
+  z-index: 2;
 }
 
 .width3 {
-        z-index: 1;
+  z-index: 1;
 }
 
 .muntil-logo {
-    color: green;
-    font-size:5em;
-    font-weight: bolder;
-    -webkit-text-stroke: 4px black;
-    text-shadow: 0 0 5px #FF0000, 0 0 7px #0000FF;
+  color: green;
+  font-size: 5em;
+  font-weight: bolder;
+  -webkit-text-stroke: 4px black;
+  text-shadow: 0 0 5px #ff0000, 0 0 7px #0000ff;
 }
 
 .header {
-    background-color: navy;
+  background-color: navy;
 }
 
 .layout {
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .left-bar {
-    display: flex;
-    flex-direction: column;
-    background-color: #FF0000;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ff0000;
+  height: 100%;
 }
 
 .right-bar {
-    display: flex;
-    flex-direction: column;
-    background-color: grey;
-    height:100%;
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+  height: 100%;
 }
 
 .modal-details {
-    width: 90vw;
+  width: 90vw;
+}
+
+.dot-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
 .dot {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
-    background: grey;
-    z-index: 99;
-    box-shadow: 0px 1px 3px;
-    padding: 3px;
-    margin: 5px;
-    
-    
+  text-align: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background: grey;
+  z-index: 99;
+  box-shadow: 0px 1px 3px;
+  padding: 3px;
+  margin: 5px;
+}
+
+.dot:hover {
+  width: 4.3rem;
+  height: 4.3rem;
+}
+
+.dot-name {
+  margin: auto;
+  line-height: 4rem;
 }

@@ -36,6 +36,10 @@ Category.init(
         model: 'user',
         key: 'id'
       }
+    },
+    icon: {
+      type: DataTypes.STRING,
+      allowNull:true
     }
   },
   {

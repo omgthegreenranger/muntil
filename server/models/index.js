@@ -30,7 +30,15 @@ Category.belongsTo(User, {
 User.hasMany(Category, {
   foreignKey: 'user_id'
 });
-   
+  
+Event.hasMany(Sticky, {
+  foreignKey: 'event_id'
+});
+
+Sticky.belongsTo(Event, {
+  foreignKey: 'event_id',
+  onDelete: 'CASCADE'
+});
    
   
 module.exports = { User, Category, Event };

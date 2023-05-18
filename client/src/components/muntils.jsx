@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
 
-export function Muntils(props) {
+export default function Muntils(props) {
   const { tils, setTils, til, setTil, width, setModalUp, setType, dots } =
     props;
   // We're setting the colour of the bar based on the Progress level. Urgency is the name of the game.
@@ -47,7 +47,10 @@ export function Muntils(props) {
         widthBar={widthBar}
         handleEventModal={handleEventModal}
       />
-      <Dots dots={dots} handleEventModal={handleEventModal} />
+      <Dots 
+        dots={dots}
+        handleEventModal={handleEventModal} 
+      />
     </>
   );
 }
@@ -85,11 +88,11 @@ function Dots(props) {
   console.log(dots);
   return (
     <>
-      <div className="d-flex flex-row justify-content-center">
+      <div className="dot-bar">
         {dots.map((dot) => {
           return (
             <div className="dot" onClick={() => handleEventModal(dot)}>
-              {dot.name}
+              <span className="dot-name">{dot.name}</span>
             </div>
           );
         })}
