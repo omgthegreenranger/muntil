@@ -20,10 +20,10 @@ export function Layout(props) {
           </Col>
         </Row>
         <Row className="d-flex direction-row w-100 justify-content-center">
-          <Col xs={2} className="left-bar">
+          <Col sm={2} xs={0} className="left-bar">
             <h1>Left</h1>
           </Col>
-          <Col xs={8} className="display-block">
+          <Col sm={8} xs={12} className="display-block">
             <div className="d-flex justify-content-center">
               <Display
                 type={type}
@@ -35,7 +35,7 @@ export function Layout(props) {
               />
             </div>
           </Col>
-          <Col xs={2} className="right-bar">
+          <Col sm={2} xs={0} className="right-bar">
             <h1>Right</h1>
           </Col>
         </Row>

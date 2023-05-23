@@ -7,10 +7,10 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const eventData = await Event.findAll({
-            attributes: ['id', 'name', 'description', 'due_date', 'created_at', 'category_id'],
+            attributes: ['id', 'name', 'description', 'due_date', 'created_at', 'category_id', 'icon'],
             include: [{
                 model: Category,
-                attributes: ['id', 'name', 'type', 't1', 't2', 't3']
+                attributes: ['id', 'name', 'type', 't1', 't2', 't3', 'icon']
             }],
         })
         const events = eventData.map((event) => event.get({ plain: true }));

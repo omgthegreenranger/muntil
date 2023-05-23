@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import { Icon } from './index';
 
 export default function Muntils(props) {
   const { tils, setTils, til, setTil, width, setModalUp, setType, dots } =
@@ -24,8 +25,12 @@ export default function Muntils(props) {
 
   function widthBar(params) {
     let progress = params;
+    if (progress > 9 ) {
+      var widthNo = width;
+    } else {
     let widthNodes = Math.floor(width / 9); // Get width for the three thresholds
-    let widthNo = Math.floor(widthNodes * progress); // get the width of the bar itself.
+    var widthNo = Math.floor(widthNodes * progress); // get the width of the bar itself.
+    }
     return widthNo;
   }
 
@@ -34,7 +39,6 @@ export default function Muntils(props) {
     setModalUp(true);
     setType("view-til");
     setTil(selected);
-    console.log(til);
     return;
   };
 
@@ -64,16 +68,16 @@ function Tils(props) {
         return (
           <>
             <Row
-              className="display-block d-inline-flex justify-content-center align-content-center my-2"
+              className="display-block g-0 d-inline-flex justify-content-center align-content-center my-2"
               width={widthBar}
             >
               <div
                 className={`til-bar ${colorStyle(til.progress)}`}
                 style={{ width: widthBar(til.progress) }}
                 onClick={() => handleEventModal(til)}
-                ariaKey={til}
+                aria-key={til}
               >
-                {til.name}
+                {til.name}<Icon icon={til.icon} />
               </div>
             </Row>
           </>
@@ -85,14 +89,14 @@ function Tils(props) {
 
 function Dots(props) {
   const { dots, handleEventModal } = props;
-  console.log(dots);
   return (
     <>
       <div className="dot-bar">
         {dots.map((dot) => {
+
           return (
             <div className="dot" onClick={() => handleEventModal(dot)}>
-              <span className="dot-name">{dot.name}</span>
+              <span className="dot-name">{dot.name} <Icon icon={dot.icon} /></span>
             </div>
           );
         })}
@@ -109,7 +113,7 @@ function WidthTable(props) {
   let width3 = width1 * 3;
 
   return (
-    <div className="gridlines">
+    <div className="gridlines mx-auto w-100">
       <div className="width width1" style={{ width: width1 }}></div>
       <div className="width width2" style={{ width: width2 }}></div>
       <div className="width width3" style={{ width: width3 }}></div>

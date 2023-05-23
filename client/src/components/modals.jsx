@@ -4,7 +4,7 @@ import "./styles.css";
 import axios from "axios";
 
 export default function Modals(props) {
-  const { type, setType, til, cats, setCats, modalUp, setModalUp } = props;
+  const { type, setType, til, cats, setCats, modalUp, setModalUp, setReload, reload } = props;
   // detects which Modal interface is to be rendered based on type State
   // note that the same component is used for both editing and creating a new Til.
   function RenderSwitch() {
@@ -17,6 +17,7 @@ export default function Modals(props) {
             handleClose={handleClose}
             cats={cats}
             setCats={setCats}
+            setReload={setReload}
           />
         );
       case "edit-til":
@@ -28,6 +29,7 @@ export default function Modals(props) {
             til={til}
             cats={cats}
             setCats={setCats}
+            setReload={setReload}
           />
         );
       case "view-til":
@@ -60,7 +62,7 @@ export default function Modals(props) {
 }
 
 function RenderTil(props) {
-  const { type, handleClose, til, cats } = props;
+  const { type, handleClose, til, cats, setReload } = props;
   // set state for editing the form, and creating empty array if a new til is being created
   const [formData, setFormData] = useState({});
 
@@ -88,6 +90,7 @@ function RenderTil(props) {
         .put(`./api/events/${formData.id}`, formData)
         .then((response) => {
           console.log(response);
+          setReload(true);
         })
         .catch((error) => {
           console.log(error);
@@ -98,6 +101,7 @@ function RenderTil(props) {
         .post("./api/events/", formData)
         .then((response) => {
           console.log(response);
+          setReload(true);
         })
         .catch((error) => {
           console.log(error);
@@ -117,7 +121,6 @@ function RenderTil(props) {
     });
   };
 
-  console.log("ID HERE", formData.category_id);
   return (
     <>
       <Modal.Header closeButton>
@@ -221,7 +224,7 @@ function RenderView(props) {
   const deleteTil = (event) => {
     axios.delete(`/api/events/${til.id}`);
   };
-  console.log(til);
+
   return (
     <>
       <Modal.Header closeButton>

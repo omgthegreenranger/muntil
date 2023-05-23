@@ -13,6 +13,7 @@ export default function Display(props) {
   const [cats, setCats] = useState(); // These are the categories
   const { type, setType, width, setWidth, modalUp, setModalUp } = props; // destructuring props
   const ref = useRef(); // ref is used for the detection of width
+  const [reload, setReload] = useState(false);
 
   // these are the MySQL queries to get the events and the categories.
   // first, we start with events
@@ -91,6 +92,8 @@ export default function Display(props) {
           setCats={setCats}
           modalUp={modalUp}
           setModalUp={setModalUp}
+          setReload={setReload}
+          reload={reload}
         />
       </div>
     </>

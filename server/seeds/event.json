@@ -5,7 +5,8 @@
         "category_id": 1,
         "due_date": "12-14-2023",
         "location": "",
-        "user_id": 1
+        "user_id": 1,
+        "icon": "TbChristmasTree"
     },
     {
         "name": "Daughter's birthday",
@@ -13,7 +14,8 @@
         "category_id": 2,
         "due_date": "05-14-2023",
         "location": "",
-        "user_id": 1
+        "user_id": 1,
+        "icon": "FaBirthdayCake"
     },
     {
         "name": "Finish the project",
@@ -21,6 +23,7 @@
         "category_id": 3,
         "due_date": "05-18-2023",
         "location": "",
-        "user_id": 2
+        "user_id": 2,
+        "icon": "MdComputer"
     }
 ]

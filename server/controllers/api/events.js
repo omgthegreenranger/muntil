@@ -16,7 +16,6 @@ router.post('/', async (req, res) => {
       })
       .then((data) => {
       eventData = data.get({plain: true});
-      console.log(eventData)
       res.send(eventData)
     })
   }
@@ -27,7 +26,6 @@ router.post('/', async (req, res) => {
   
   router.put('/:id', async (req, res) => {
     try {
-      console.log(req.body);
       const eventUpdate = await Event.update({
           name: req.body.name,
           description: req.body.description,
@@ -41,7 +39,6 @@ router.post('/', async (req, res) => {
       })
       res.json(eventUpdate)
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   })

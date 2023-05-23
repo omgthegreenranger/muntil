@@ -5,12 +5,11 @@
   justify-content: center;
   padding: 10px;
 }
-.display-block {
-}
 
 .display-block {
   margin-top: 0;
   height: 4rem;
+
 }
 
 .til-bar {
@@ -142,4 +141,19 @@
 .dot-name {
   margin: auto;
   line-height: 4rem;
+}
+
+@media screen and (max-width: 768px) {
+  .left-bar {
+    display:none;
+  }
+  .right-bar {
+    display: none;
+  }
+  .muntil-logo {
+    font-size: 7vh;
+  }
+  .display-block {
+    width: 100%;
+  }
 }

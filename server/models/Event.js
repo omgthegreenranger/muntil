@@ -40,6 +40,9 @@ Event.init(
         model: 'user',
         key: 'id'
       }
+    },
+    icon: {
+      type: DataTypes.STRING,
     }
   },
   {
