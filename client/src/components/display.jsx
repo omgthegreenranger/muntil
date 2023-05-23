@@ -3,7 +3,9 @@ import { Row, Button } from "react-bootstrap";
 import "./styles.css";
 import { Modals, Muntils } from "./index";
 import axios from "axios";
-
+import { FaAlignCenter } from 'react-icons/fa';
+import { HiCircleStack } from 'react-icons/hi2';
+  
 export default function Display(props) {
   const [tils, setTils] = useState([]); // These are bars that are relevant
   const [dots, setDots] = useState([]); // There are dots that are not.
@@ -25,7 +27,6 @@ export default function Display(props) {
         data[index].progress = Math.floor(data[index].progress);
         let datum = data[index];
         if (data[index].progress >= 1) {
-          console.log("Yas!");
           setTils((current) => [...current, datum]);
         } else if (data[index].progress <= 0) {
           setDots((current) => [...current, datum]);
@@ -58,10 +59,10 @@ export default function Display(props) {
 
   // Modal functions
   // Quick modal-opening function for adding a new event
-  const newModal = () => {
-    props.setModalUp(true);
-    setType("new-til");
-  };
+  // const newModal = () => {
+  //   setModalUp(true);
+  //   setType("new-til");
+  // };
 
   // Without the Tils from MySQL, why do we even show anything? Let's not.
   if (!tils) return <h3>LOADING...</h3>;
@@ -69,24 +70,7 @@ export default function Display(props) {
   return (
     <>
       <div ref={ref} className="display">
-        <div>
-          <select>
-            <option>View by...</option>
-            <option value="urg-view">Urgency</option>
-            <option value="ag-view">Agenda</option>
-            <option value="cal-view">Calendar</option>
-          </select>
-          <select>
-            <option>Sort by...</option>
-            <option value="urg-sort">Urgency</option>
-            <option value="date-sort">Due Date</option>
-            <option value="cat-sort">Category</option>
-            <option value="sticky-sort">Stickies</option>
-          </select>
-          <Button className="add-new-btn" onClick={newModal}>
-            +
-          </Button>
-        </div>
+        <DisplayNav setType={setType} setModalUp={setModalUp} />
         <Muntils
           tils={tils}
           setTils={setTils}
@@ -111,4 +95,38 @@ export default function Display(props) {
       </div>
     </>
   );
+}
+
+function DisplayNav(props) {
+  const {setType, setModalUp } = props;
+  // Modal functions
+  // Quick modal-opening function for adding a new event
+
+  const newModal = () => {
+    setModalUp(true);
+    setType("new-til");
+  };
+  return(
+    <div className="d-inline-flex flex-row justify-content-between">
+      <div>
+        <select>
+          <option>View by...</option>
+          <option value="urg-view">Urgency</option>
+          <option value="ag-view">Agenda</option>
+          <option value="cal-view">Calendar</option>
+        </select>
+        <select>
+          <option>Sort by...</option>
+          <option value="urg-sort">Urgency</option>
+          <option value="date-sort">Due Date</option>
+          <option value="cat-sort">Category</option>
+          <option value="sticky-sort">Stickies</option>
+        </select>
+      </div>
+      <div className="display-pick"><FaAlignCenter /> <HiCircleStack /></div>
+      <Button className="add-new-btn" onClick={newModal}>
+        +
+      </Button>
+    </div>
+  )
 }
