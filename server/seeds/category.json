@@ -6,7 +6,7 @@
         "t2": "2 month",
         "t3": "3 month",
         "user_id":1,
-        "icon": "<TbChristmasTree />"
+        "icon": "ChristmasTree"
     },
     {
         "name": "Birthday - gifts",
@@ -15,7 +15,7 @@
         "t2": "6 week",
         "t3": "3 month",
         "user_id":1,
-        "icon": "<FaBirthdayCake />"
+        "icon": "BirthdayCake"
     },
     {
         "name": "Work",
@@ -24,6 +24,6 @@
         "t2": "2 day",
         "t3": "4 day",
         "user_id":1,
-        "icon": "<FaBriefcase />"
+        "icon": "Briefcase"
     }
 ]

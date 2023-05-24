@@ -6,7 +6,7 @@
         "due_date": "12-14-2023",
         "location": "",
         "user_id": 1,
-        "icon": "TbChristmasTree"
+        "icon": "ChristmasTree"
     },
     {
         "name": "Daughter's birthday",
@@ -15,7 +15,7 @@
         "due_date": "05-14-2023",
         "location": "",
         "user_id": 1,
-        "icon": "FaBirthdayCake"
+        "icon": "BirthdayCake"
     },
     {
         "name": "Finish the project",
@@ -24,6 +24,6 @@
         "due_date": "05-18-2023",
         "location": "",
         "user_id": 2,
-        "icon": "MdComputer"
+        "icon": "Computer"
     }
 ]

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Modal, Container, Col, Row, Button, Form } from "react-bootstrap";
 import "./styles.css";
 import axios from "axios";
+import { Category } from './index';
 
 export default function Modals(props) {
   const { type, setType, til, cats, setCats, modalUp, setModalUp, setReload, reload } = props;
+  const [catType, setCatType] = useState();
   // detects which Modal interface is to be rendered based on type State
   // note that the same component is used for both editing and creating a new Til.
   function RenderSwitch() {
@@ -18,6 +20,8 @@ export default function Modals(props) {
             cats={cats}
             setCats={setCats}
             setReload={setReload}
+            catType={catType}
+            setCatType={setCatType}
           />
         );
       case "edit-til":
@@ -30,6 +34,8 @@ export default function Modals(props) {
             cats={cats}
             setCats={setCats}
             setReload={setReload}
+            catType={catType}
+            setCatType={setCatType}
           />
         );
       case "view-til":
@@ -41,6 +47,8 @@ export default function Modals(props) {
             til={til}
             cats={cats}
             setCats={setCats}
+            catType={catType}
+            setCatType={setCatType}
           />
         );
       default:
@@ -62,7 +70,7 @@ export default function Modals(props) {
 }
 
 function RenderTil(props) {
-  const { type, handleClose, til, cats, setReload } = props;
+  const { type, handleClose, til, cats, setReload, catType, setCatType  } = props;
   // set state for editing the form, and creating empty array if a new til is being created
   const [formData, setFormData] = useState({});
 
@@ -75,10 +83,13 @@ function RenderTil(props) {
         due_date: "",
         location: "",
         user_id: "1",
+        category: []
       });
+      setCatType("new-cat");
     }
     if (type === "edit-til") {
       setFormData(til);
+      setCatType("edit-cat");
     }
   }, [type, til]);
 
@@ -193,8 +204,7 @@ function RenderTil(props) {
                 </Row>
             </Col>
             <Col>
-                <h4>Category information</h4>
-                
+              <Category cat={til.category} catType={catType} />   
             </Col>
         </Container>
       </Modal.Body>
@@ -211,13 +221,14 @@ function RenderTil(props) {
 }
 
 function RenderView(props) {
-  const { setType, handleClose, til } = props;
-
+  const { type, setType, handleClose, til, catType, setCatType } = props;
+  setCatType("view-cat")
   // Because we are not editing anything, the view component is unique.
 
   // function fires when Edit button is selected.
   const editTil = (event) => {
     setType("edit-til");
+    setCatType("edit-cat")
   };
 
   // Deletes the Till being viewed.
@@ -244,11 +255,7 @@ function RenderView(props) {
             </Row>
           </Col>
           <Col>
-            <h4>Category information</h4>
-            <div>Name: {til.category.name}</div>
-            <div>Start considering: {til.category.t3}</div>
-            <div>Better get started: {til.category.t2}</div>
-            <div>Urgent: {til.category.t1}</div>
+            <Category cat={til.category} catType={catType} />
           </Col>
         </Container>
       </Modal.Body>
