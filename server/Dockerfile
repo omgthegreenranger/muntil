@@ -1,12 +1,10 @@
 FROM node:lts-alpine
 ENV NODE_ENV=production
-ENV PUID=1000
-ENV PGID=1001
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm install -g nodemon
 RUN npm install --production --silent && mv node_modules ../
 COPY . .
-EXPOSE 3000
-RUN chown -R node /usr/src/app
+EXPOSE 5000
 USER node
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

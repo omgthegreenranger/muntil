@@ -5,7 +5,11 @@
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
-            "platform": "node"
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/client/node_modules/@restart/hooks/useIntersectionObserver/package.json",
+                "localRoot": "${workspaceFolder}/client/node_modules/@restart/hooks/useIntersectionObserver"
+            }
         }
     ]
 }
