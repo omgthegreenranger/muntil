@@ -143,6 +143,18 @@
   line-height: 4rem;
 }
 
+.proj-info {
+  border-right: 1px black solid;
+  background-color:aliceblue;
+  height: 100%;
+  padding: 1rem;
+}
+
+.cat-info {
+  padding: 1rem;
+}
+
+
 @media screen and (max-width: 768px) {
   .left-bar {
     display:none;

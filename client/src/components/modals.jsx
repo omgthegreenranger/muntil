@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Modal, Container, Col, Row, Button, Form } from "react-bootstrap";
 import "./styles.css";
 import axios from "axios";
-import { Category } from './index';
+import { Category, Icon, Markers } from './index';
 
 export default function Modals(props) {
-  const { type, setType, til, cats, setCats, modalUp, setModalUp, setReload, reload } = props;
-  const [catType, setCatType] = useState();
+  const { type, setType, til, cats, setCats, modalUp, setModalUp, setReload, reload, setCatType, catType } = props;
   // detects which Modal interface is to be rendered based on type State
   // note that the same component is used for both editing and creating a new Til.
   function RenderSwitch() {
@@ -73,25 +72,32 @@ function RenderTil(props) {
   const { type, handleClose, til, cats, setReload, catType, setCatType  } = props;
   // set state for editing the form, and creating empty array if a new til is being created
   const [formData, setFormData] = useState({});
+  console.log(type);
 
   useEffect(() => {
     if (type === "new-til") {
+      console.log("new til!")
       setFormData({
-        name: "",
-        description: "",
-        category_id: "",
-        due_date: "",
-        location: "",
-        user_id: "1",
-        category: []
-      });
-      setCatType("new-cat");
-    }
-    if (type === "edit-til") {
+            icon: "default",
+            name: "",
+            description: "",
+            category_id: "",
+            due_date: "",
+            location: "",
+            user_id: "1",
+            category: {
+              icon: "default",
+              name: "",
+              type: ""
+            }
+        });
+      setCatType("edit-cat");
+    } else if (type === "edit-til") {
+      console.log("edit til!")
       setFormData(til);
       setCatType("edit-cat");
     }
-  }, [type, til]);
+  });
 
   // submit function
 
@@ -239,22 +245,20 @@ function RenderView(props) {
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>{til.name}</Modal.Title>
+        <Modal.Title><Icon icon={til.icon} /> {til.name} - due {til.due_date}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Container className="d-flex flex-row">
-          <Col>
-            <Row className="d-flex">
-              <Col>
-                <span>{til.description}</span>
-                <span>{til.due_date}</span>
-              </Col>
-            </Row>
-            <Row>
-              <Col></Col>
-            </Row>
+          <Col xs={6}>
+            <Col className="proj-info">
+              <h4>{til.description}</h4>
+              <div>{til.due_date}</div>
+              <div>
+                <Markers til={til}/>
+              </div>
+            </Col>
           </Col>
-          <Col>
+          <Col xs={6} className="cat-info">
             <Category cat={til.category} catType={catType} />
           </Col>
         </Container>

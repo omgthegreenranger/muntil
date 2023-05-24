@@ -1,14 +1,14 @@
 version: '3.4'
 
 services:
-  restarthooksuseintersectionobserver:
-    image: restarthooksuseintersectionobserver
+  client:
+    image: client
     build:
-      context: client/node_modules/@restart/hooks/useIntersectionObserver
+      context: client
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: development
     ports:
-      - 5000:5000
+      - 3000:3000
       - 9229:9229
-    command: ["node", "--inspect=0.0.0.0:9229", "../cjs/useIntersectionObserver.js"]
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]

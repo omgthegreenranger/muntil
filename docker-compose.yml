@@ -1,12 +1,35 @@
 version: '3.4'
 
 services:
-  restarthooksuseintersectionobserver:
-    image: restarthooksuseintersectionobserver
+  front:
+    image: client
     build:
-      context: client/node_modules/@restart/hooks/useIntersectionObserver
+      context: client
       dockerfile: ./Dockerfile
     environment:
+      PGID: 1001
+      PUID: 1000
       NODE_ENV: production
+    networks:
+      - casa-net
     ports:
-      - 5000:5000
+      - 3000:3000/tcp
+    restart: "unless-stopped"
+  node:
+    image: server
+    build:
+      context: server
+      dockerfile: ./Dockerfile
+    environment:
+      PGID: 1001
+      PUID: 1000
+      NODE_ENV: production
+    networks:
+      - casa-net
+    ports:
+      - 5000:5000/tcp
+    restart: "unless-stopped"
+networks:
+  casa-net:
+    external: true
+    name: "casa-net"

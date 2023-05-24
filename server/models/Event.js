@@ -43,6 +43,18 @@ Event.init(
     },
     icon: {
       type: DataTypes.STRING,
+    },
+    easy: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    mid: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    urgent: {
+      type: DataTypes.DATE,
+      allowNull: false,
     }
   },
   {

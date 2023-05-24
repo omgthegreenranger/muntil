@@ -5,5 +5,6 @@ import Modals from './modals.jsx';
 import Muntils from './muntils.jsx';
 import Category from './category.jsx';
 import Icon from './icons.jsx';
+import Markers from './markers.jsx';
 
-export { Layout, Display, Calendar, Muntils, Modals, Category, Icon };
+export { Layout, Display, Calendar, Muntils, Modals, Category, Icon, Markers };

@@ -6,7 +6,7 @@ import {Icon} from './index';
 
 export default function Category(props) {
     const { catType, setCatType, cat } = props;
-    console.log(cat, catType);
+    console.log(props);
 
     function CatSwitch() {
         switch (catType) {
@@ -48,9 +48,7 @@ function ViewCategory(props) {
     const { cat } = props;
     return(
         <>
-            <Icon icon={cat.icon}/>
-            <h4>Category information</h4>
-            <div>Name: {cat.name}</div>
+            <h4><Icon icon={cat.icon}/>{cat.name}</h4>
             <div>Start considering: {cat.t3}</div>
             <div>Better get started: {cat.t2}</div>
             <div>Urgent: {cat.t1}</div>
@@ -60,10 +58,10 @@ function ViewCategory(props) {
 
 function EditCategory(props) {
     const { cat } = props;
+    console.log(cat);
     return(
         <>
             <Icon icon={cat.icon} />
-            <h4>Category information</h4>
             <div>Name: {cat.name}</div>
             <div>Start considering: {cat.t3}</div>
             <div>Better get started: {cat.t2}</div>
@@ -77,7 +75,6 @@ function NewCategory(props) {
     return(
         <>
             <Icon icon={cat.icon} />
-            <h4>Category information</h4>
             <div>Name: {cat.name}</div>
             <div>Start considering: {cat.t3}</div>
             <div>Better get started: {cat.t2}</div>

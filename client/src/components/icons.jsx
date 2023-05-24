@@ -3,10 +3,10 @@ import { TbChristmasTree } from 'react-icons/tb';
 import { FaBirthdayCake, FaBriefcase } from 'react-icons/fa';
 import { MdComputer } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import { BiHealth } from 'react-icons/bi';
 
 export default function Icon(props) {
     const { icon } = props;
-console.log(icon);
     function Icons() {           
         switch (icon) {
             case "ChristmasTree":
@@ -22,13 +22,15 @@ console.log(icon);
             return (
                 <MdComputer />
             );
+            case "default":
+                return(
+                <BiHealth />
+            );
             default: 
             return (
-                <>
-                "No image selected"
-                </>
-            )
-            }
+                <BiHealth />
+            );
+            };
             }
     // compare the icon prop to our imported icons. If there, return with Import
 

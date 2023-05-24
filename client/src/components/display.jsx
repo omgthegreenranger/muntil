@@ -14,6 +14,7 @@ export default function Display(props) {
   const { type, setType, width, setWidth, modalUp, setModalUp } = props; // destructuring props
   const ref = useRef(); // ref is used for the detection of width
   const [reload, setReload] = useState(false);
+  const [catType, setCatType] = useState();
 
   // these are the MySQL queries to get the events and the categories.
   // first, we start with events
@@ -64,14 +65,14 @@ export default function Display(props) {
   //   setModalUp(true);
   //   setType("new-til");
   // };
-
+console.log(til);
   // Without the Tils from MySQL, why do we even show anything? Let's not.
   if (!tils) return <h3>LOADING...</h3>;
 
   return (
     <>
       <div ref={ref} className="display">
-        <DisplayNav setType={setType} setModalUp={setModalUp} />
+        <DisplayNav setType={setType} setModalUp={setModalUp} setCatType={setCatType} setTil={setTil} />
         <Muntils
           tils={tils}
           setTils={setTils}
@@ -94,6 +95,8 @@ export default function Display(props) {
           setModalUp={setModalUp}
           setReload={setReload}
           reload={reload}
+          setCatType={setCatType}
+          catType={catType}
         />
       </div>
     </>
@@ -101,7 +104,7 @@ export default function Display(props) {
 }
 
 function DisplayNav(props) {
-  const {setType, setModalUp } = props;
+  const {setType, setModalUp, setTil, setCatType} = props;
   // Modal functions
   // Quick modal-opening function for adding a new event
 
