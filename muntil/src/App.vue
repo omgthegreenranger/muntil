@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import { RouterLink, RouterView } from 'vue-router'
+import Toolbar from './components/Toolbar.vue'
+import EventWindow from './views/EventWindow.vue'
 import { useCounterStore } from '@/stores/counter'
 
 const counter = useCounterStore()
@@ -14,19 +15,10 @@ counter.increment()
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <Toolbar />
+    <div class="logo">MUNTIL CALENDAR</div>
   </header>
-
-  <RouterView />
+      <EventWindow stage="" />
 </template>
 
 <style scoped>
@@ -68,8 +60,9 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
+    flex-direction: column;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    /* padding-right: calc(var(--section-gap) / 2); */
   }
 
   .logo {
