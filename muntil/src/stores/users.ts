@@ -10,14 +10,14 @@ import { API } from "../services";
 import { AxiosError } from "axios";
 
 
-export const useCategoriesList = defineStore('users', () => {
-    const categories = ref<User[]>([]);
+export const useUserList = defineStore('users', () => {
+    const users = ref<User[]>([]);
 
-    function initCategories(data: User[]) {
+    function initUser(data: User[]) {
         users.value = data;
     }
 
-    function addNewcategorieUser(category: User) {
+    function addNewUser(category: User) {
         users.value.push(category);
     }
 
@@ -29,9 +29,9 @@ export const useCategoriesList = defineStore('users', () => {
 
     async function dispatchGetUsers(): Promise<APIResponse<null>> {
         try {
-            const { status, data } = await API.user.getUsers();
+            const { status, data } = await API.users.getUsers();
             if (status === 200) {
-                initUsers(data.content);
+                initUser(data.content);
                 return {
                     success: true,
                     content: null,
@@ -132,7 +132,7 @@ export const useCategoriesList = defineStore('users', () => {
 
     return {
         users,
-        initUsers,
+        initUser,
         removeUser,
         dispatchGetUsers,
         dispatchCreateUser,

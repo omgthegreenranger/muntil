@@ -17,12 +17,12 @@ export const useCategoriesList = defineStore('categories', () => {
         categories.value = data;
     }
 
-    function addNewcategorieCategory(category: Category) {
+    function addNewCategory(category: Category) {
         categories.value.push(category);
     }
 
     function removeCategory(id: number) {
-        const idx = categories.value.findIndex((s) => s.id === id);
+        const idx = categories.value.findIndex((s) => s.catId === id);
         if (idx === -1) return;
         categories.value.splice(idx, 1);
     }
@@ -56,7 +56,7 @@ export const useCategoriesList = defineStore('categories', () => {
         input: InputCreateCategory
     ): Promise<APIResponse<null>> {
         try {
-            const { status, data } = await API.categories.createCategory(input);
+            const { status, data } = await API.category.createCategory(input);
             if (status === 200) {
                 addNewCategory(data.content);
                 return {
@@ -81,7 +81,7 @@ export const useCategoriesList = defineStore('categories', () => {
 
     async function dispatchDeleteCategory(id: number): Promise<APIResponse<null>> {
         try {
-            const { status } = await API.categories.deleteCategory(id);
+            const { status } = await API.category.deleteCategory(id);
             if (status === 200) {
                 removeCategory(id);
                 return {
@@ -108,7 +108,7 @@ export const useCategoriesList = defineStore('categories', () => {
         input: InputUpdateCategory
     ): Promise<APIResponse<null>> {
         try {
-            const { status } = await API.categories.updateCategory(input);
+            const { status } = await API.category.updateCategory(input);
             if (status === 200) {
                 return {
                     success: true,

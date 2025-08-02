@@ -1,14 +1,18 @@
 <script setup lang="ts">
-
+  const props = defineProps<{
+    //   RouterLink: RouterLink
+  }>()
+  import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-    <div>
-        <div name='item'>Account</div>
-        <div name='item'>Settings</div>
-        <div name='item'>Log-in/Log-out</div>
-        <div name='item'>Help</div>
-    </div>
+    <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/account">Account</RouterLink>
+        <RouterLink to="/settings">Settings</RouterLink>
+        <RouterLink to="/login">Log-in/Log-out</RouterLink>
+        <RouterLink to="/support">Help</RouterLink>
+    </nav>
 </template>
 
 <style scoped>
@@ -19,7 +23,7 @@
         flex-direction: row;
     }
 
-    #name {
+    nav {
         font-family:'Times New Roman', Times, serif;
         font-size:larger;
     }

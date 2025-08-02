@@ -1,9 +1,10 @@
 <script setup lang="ts">
-// import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import Toolbar from './components/Toolbar.vue'
 import EventWindow from './views/EventWindow.vue'
 import { useCounterStore } from '@/stores/counter'
-
+import { useEventsList } from './stores/events'
+import { useCategoriesList } from './stores/categories'
 const counter = useCounterStore()
 
 counter.count++
@@ -11,6 +12,24 @@ counter.count++
 counter.$patch({ count: counter.count + 1 })
 // or using an action instead
 counter.increment()
+
+// const eventList = useEventsList();
+// eventList.initEvents;
+// eventList.dispatchCreateEvent({ name: 'test event',
+//   due: 1991919111,
+//   description: "short description",
+//   urgency: 1,
+//   event_range_low: 0,
+//   event_range_low_title: "",
+//   event_range_med: 0,
+//   event_range_med_title: "",
+//   event_range_high: 0,
+//   event_range_high_title: "",
+//   catId: 2,
+//   userId: 1} );
+// const catList = useCategoriesList();
+// catList.dispatchCreateCategory;
+
 </script>
 
 <template>
@@ -18,7 +37,7 @@ counter.increment()
     <Toolbar />
     <div class="logo">MUNTIL CALENDAR</div>
   </header>
-      <EventWindow stage="" />
+      <RouterView />
 </template>
 
 <style scoped>

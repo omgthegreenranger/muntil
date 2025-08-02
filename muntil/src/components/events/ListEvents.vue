@@ -1,0 +1,17 @@
+<script setup lang="ts">
+import { useEventsList } from '@/stores/events';
+
+const eventList = useEventsList().dispatchGetEvents();
+console.log(eventList)
+</script>
+
+<template>
+    <div>
+        <h1>LIST EVENTS</h1>
+        <h3>This is the component that will list more than one event - it will show all urgencies and single urgencies.</h3>
+        
+    </div>
+</template>
+
+<!-- <style scoped>
+</style> -->
