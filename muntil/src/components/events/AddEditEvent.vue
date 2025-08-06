@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  const props = defineProps<{
+    stage: stage
+  }>()
 import { useEventsList } from '@/stores/events';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -6,7 +9,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const eventList = useEventsList().dispatchGetEvents();
 const categoryList: Array<string> = []
 
-
+console.log(props.stage)
 </script>
 
 <template>

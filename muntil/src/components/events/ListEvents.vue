@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { useEventsList } from '@/stores/events';
+const props  = defineProps<{
+   eventsList: String[];
+}>()
+// import { useEventsList } from '@/stores/events';
+import UrgencyBlock from '@/components/events';
 
-const eventList = useEventsList().dispatchGetEvents();
-console.log(eventList)
+// const eventList = await useEventsList().dispatchGetEvents();
+console.log(props.eventsList)
+
+
 </script>
 
 <template>
@@ -12,6 +18,5 @@ console.log(eventList)
         
     </div>
 </template>
-
 <!-- <style scoped>
 </style> -->

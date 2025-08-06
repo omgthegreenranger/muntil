@@ -3,6 +3,7 @@
     //   RouterLink: RouterLink
   }>()
   import { RouterLink } from 'vue-router'
+  import { useViewStore } from '../stores/state.js'
 </script>
 
 <template>

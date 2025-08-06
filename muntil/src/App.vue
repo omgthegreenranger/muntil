@@ -5,13 +5,13 @@ import EventWindow from './views/EventWindow.vue'
 import { useCounterStore } from '@/stores/counter'
 import { useEventsList } from './stores/events'
 import { useCategoriesList } from './stores/categories'
-const counter = useCounterStore()
+import { useViewStore } from './stores/state.js'
 
-counter.count++
+const viewStage= useViewStore()
 // with autocompletion ✨
-counter.$patch({ count: counter.count + 1 })
+// counter.$patch({ count: counter.count + 1 })
 // or using an action instead
-counter.increment()
+// counter.increment()
 
 // const eventList = useEventsList();
 // eventList.initEvents;
@@ -36,6 +36,9 @@ counter.increment()
   <header>
     <Toolbar />
     <div class="logo">MUNTIL CALENDAR</div>
+    <button @click="viewStage.$patch({viewState: 'default'})">DEFAULT</button>
+    <button @click="viewStage.$patch({viewState: 'add'})">ADD</button>
+    {{ viewStage.viewState }}
   </header>
       <RouterView />
 </template>

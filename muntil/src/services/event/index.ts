@@ -4,7 +4,7 @@ import { type APIResponse } from "../types";
 import { type Event, type InputCreateEvent, type InputUpdateEvent } from "./types";
 
 async function getEvents() {
-  return await http.get<APIResponse<Event[]>>("Event");
+  return await http.get<APIResponse<Event[]>>("event");
 }
 
 async function deleteEvent(id: number) {

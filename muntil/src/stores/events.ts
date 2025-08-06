@@ -27,14 +27,15 @@ export const useEventsList = defineStore('event', () => {
         events.value.splice(idx, 1);
     }
 
-    async function dispatchGetEvents(): Promise<APIResponse<null>> {
+    async function dispatchGetEvents(): Promise<APIResponse<Event[]>> {
         try {
             const { status, data } = await API.events.getEvents();
             if (status === 200) {
                 initEvents(data.content);
+
                 return {
                     success: true,
-                    content: null,
+                    content: data,
                 };
             }
         } catch (error) {

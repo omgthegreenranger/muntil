@@ -4,7 +4,7 @@ import { type APIResponse } from "../types";
 import { type Category, type InputCreateCategory, type InputUpdateCategory } from "./types";
 
 async function getCategory() {
-  return await http.get<APIResponse<Category[]>>("category");
+  return await http.get<APIResponse<Category[]>>(`category`);
 }
 
 async function deleteCategory(id: number) {
