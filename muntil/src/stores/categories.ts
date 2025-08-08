@@ -12,7 +12,7 @@ import { AxiosError } from "axios";
 
 export const useCategoriesList = defineStore('categories', () => {
     const categories = ref<Category[]>([]);
-
+ 
     function initCategories(data: Category[]) {
         categories.value = data;
     }
@@ -34,7 +34,7 @@ export const useCategoriesList = defineStore('categories', () => {
                 initCategories(data.content);
                 return {
                     success: true,
-                    content: null,
+                    content: data,
                 };
             }
         } catch (error) {
@@ -61,7 +61,7 @@ export const useCategoriesList = defineStore('categories', () => {
                 addNewCategory(data.content);
                 return {
                     success: true,
-                    content: null,
+                    content: data,
                 };
             }
         } catch (error) {
@@ -112,7 +112,7 @@ export const useCategoriesList = defineStore('categories', () => {
             if (status === 200) {
                 return {
                     success: true,
-                    content: null,
+                    content: data,
                 };
             }
         } catch (error) {

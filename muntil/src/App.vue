@@ -7,28 +7,17 @@ import { useEventsList } from './stores/events'
 import { useCategoriesList } from './stores/categories'
 import { useViewStore } from './stores/state.js'
 
+const categories = useCategoriesList();
+const events = useEventsList();
 const viewStage= useViewStore()
 // with autocompletion ✨
 // counter.$patch({ count: counter.count + 1 })
 // or using an action instead
 // counter.increment()
-
-// const eventList = useEventsList();
-// eventList.initEvents;
-// eventList.dispatchCreateEvent({ name: 'test event',
-//   due: 1991919111,
-//   description: "short description",
-//   urgency: 1,
-//   event_range_low: 0,
-//   event_range_low_title: "",
-//   event_range_med: 0,
-//   event_range_med_title: "",
-//   event_range_high: 0,
-//   event_range_high_title: "",
-//   catId: 2,
-//   userId: 1} );
-// const catList = useCategoriesList();
-// catList.dispatchCreateCategory;
+events.dispatchGetEvents()
+    .then(data => {console.log(data.success); events.$patch({events: data.content}); return data}).then(data => {data.success ? console.log("Yes", data.success) : console.log("Nope, failed")})
+categories.dispatchGetCategories()
+    .then(data => {console.log(data.content); categories.$patch({categories: data.content})})
 
 </script>
 
