@@ -5,31 +5,35 @@ import EventWindow from './views/EventWindow.vue'
 import { useCounterStore } from '@/stores/counter'
 import { useEventsList } from './stores/events'
 import { useCategoriesList } from './stores/categories'
-import { useViewStore } from './stores/state.js'
+import { useGlobalStore } from './stores/state.js'
 
 const categories = useCategoriesList();
 const events = useEventsList();
-const viewStage= useViewStore()
-// with autocompletion ✨
-// counter.$patch({ count: counter.count + 1 })
-// or using an action instead
-// counter.increment()
-events.dispatchGetEvents()
-    .then(data => {console.log(data.success); events.$patch({events: data.content}); return data}).then(data => {data.success ? console.log("Yes", data.success) : console.log("Nope, failed")})
-categories.dispatchGetCategories()
-    .then(data => {console.log(data.content); categories.$patch({categories: data.content})})
+const viewStage = useGlobalStore()
+async function setStores() {
+  await events.dispatchGetEvents()
+    .then(data => { console.log(data.success); events.$patch({ events: data.content }); return data }).then(data => { data.success ? console.log("Yes", data) : console.log("Nope, failed") })
+  await categories.dispatchGetCategories()
+    .then(data => { console.log(data); categories.$patch({ categories: data.content }) })
+}
 
+setStores();
 </script>
 
 <template>
   <header>
     <Toolbar />
     <div class="logo">MUNTIL CALENDAR</div>
-    <button @click="viewStage.$patch({viewState: 'default'})">DEFAULT</button>
-    <button @click="viewStage.$patch({viewState: 'add'})">ADD</button>
+    <button @click="viewStage.$patch({ viewState: 'default' })">DEFAULT</button>
+    <button @click="viewStage.$patch({ viewState: 'add' })">ADD</button>
     {{ viewStage.viewState }}
   </header>
-      <RouterView />
+  <Suspense>
+  <RouterView />
+  <template #fallback>
+    <div><h3>Waiting on data</h3></div>
+  </template>
+  </Suspense>
 </template>
 
 <style scoped>

@@ -27,7 +27,7 @@ export const useCategoriesList = defineStore('categories', () => {
         categories.value.splice(idx, 1);
     }
 
-    async function dispatchGetCategories(): Promise<APIResponse<null>> {
+    async function dispatchGetCategories(): Promise<APIResponse<Category[]>> {
         try {
             const { status, data } = await API.category.getCategory();
             if (status === 200) {

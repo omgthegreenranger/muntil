@@ -4,12 +4,11 @@ export type Category = {
   desc: string;
   icon: string;
   range_low: number;
-  range_low_title: number;
+  range_low_title: string;
   range_med: number;
-  range_med_title: number;
+  range_med_title: string;
   range_high: number;
-  range_high_title: number;
-
+  range_high_title: string;
 };
 
 export type InputCreateCategory = {
@@ -17,11 +16,11 @@ export type InputCreateCategory = {
   desc: string;
   icon: string;
   range_low: number;
-  range_low_title: number;
+  range_low_title: string;
   range_med: number;
-  range_med_title: number;
+  range_med_title: string;
   range_high: number;
-  range_high_title: number;
+  range_high_title: string;
 };
 
 export type InputUpdateCategory = {
@@ -30,9 +29,9 @@ export type InputUpdateCategory = {
   desc: string;
   icon: string;
   range_low: number;
-  range_low_title: number;
+  range_low_title: string;
   range_med: number;
-  range_med_title: number;
+  range_med_title: string;
   range_high: number;
-  range_high_title: number;
+  range_high_title: string;
 };

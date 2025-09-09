@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, toRefs } from 'vue'
 import { defineStore } from 'pinia'
 import {
     type InputCreateEvent,
@@ -26,13 +26,19 @@ export const useEventsList = defineStore('event', () => {
         if (idx === -1) return;
         events.value.splice(idx, 1);
     }
+    async function sortByUrgency(values: Event[]) {
+        console.log(events)
+        set: { events }
+        // Object.groupBy(toRaw(events).value, (urgency) =>
+        //     console.log(events.value), urgency)
 
-    async function dispatchGetEvents(): Promise<APIResponse<Event[]>> {
+        return values
+    }
+    async function dispatchGetEvents(): Promise<APIResponse<null>> {
         try {
             const { status, data } = await API.events.getEvents();
             if (status === 200) {
                 initEvents(data.content);
-
                 return {
                     success: true,
                     content: data,
@@ -134,10 +140,13 @@ export const useEventsList = defineStore('event', () => {
     return {
         events,
         initEvents,
+        addNewEvent,
         removeEvent,
+        sortByUrgency,
         dispatchGetEvents,
         dispatchCreateEvent,
         dispatchDeleteEvent,
         dispatchUpdateEvent,
     };
-});
+}
+);
